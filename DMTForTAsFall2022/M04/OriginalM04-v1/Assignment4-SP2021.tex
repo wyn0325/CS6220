@@ -1,0 +1,112 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document class 
+\documentclass[letter-paper,12pt]{article} % This defines the style of your paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor={blue},
+}
+
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+\usepackage{graphicx} 
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{subfigure}
+\usepackage{subcaption}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+\pagestyle{fancy} % With this command we can customize the header style.
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+% \title{CS 6220 Data Mining --- Assignment 4}
+% \date{}
+
+\begin{document}
+% \thispagestyle{empty} % This command disables the header on the first page. 
+% \maketitle
+
+% \hline
+\begin{center}
+\begin{Large}
+CS 6220 Data Mining --- Assignment 4
+\end{Large}
+\end{center}
+
+\hline
+\hline
+~\\~\\~\\
+
+\begin{center}
+\begin{Large}
+\textbf{Association Rules}
+\end{Large}
+\end{center}
+~\\~\\
+
+
+To complete this assignment you will need to download the following resources:
+
+\begin{enumerate}
+    \item You may find a notebook with potential helper functions for implementing the Apriori \url{https://goo.gl/1HtnFQ}. Add your portion of the assignment solution to the end of this file and submit it.
+    \item The dataset you’ll be using grocery.csv can be found at \\ \url{https://www.dropbox.com/s/mz6j5glhnd3skfs/grocery.csv?d}\\ Download the file and place it in the same directory as your notebook.
+\end{enumerate}
+
+
+\textbf{Objectives:}
+\begin{enumerate}
+\item Define association rules and state their usefulness
+\item Programmatically apply association rules to the given dataset and analyze the results
+\end{enumerate}
+~\\
+\textbf{Submission:}\\
+
+Submit your ipynb file on the Assignment submission portal. \\~\\
+
+
+\textbf{Grading Criteria:}\\
+Follow the instructions in the pdf, and complete each task. You will be graded on the application of the modules’ topics, the completeness of your answers to the questions in the assignment notebook, and the clarity of your writing and code.\\~\\
+
+
+\newpage
+
+\begin{center}
+    \Large \textbf{What You Need to Do}
+\end{center}
+
+\textbf{Part 1 - Apriori [40 Points]:}\\
+
+The dataset above contains nearly 10 thousand transactions recorded from a grocery story. Each row in the dataset refers to a given transaction, where the items purchased are separated by commas. For example, on the second row we have a transaction with three items: {tropical fruit, yogurt, and coffee}. The attached notebook file (first download link above) contains a helper function that allows you to quickly load that file into a format that can be easily processed in Python.\\
+
+Your task here is to make use of the provided functions to generate candidate itemsets, using Apriori select those that are frequent, and subsequently list association rules derived from these.\\
+
+Note that because we have thousands of transactions, it may be hard to find itemsets with high supports (e.g., 20\%), so in order to see interesting results, make sure you experiment with lower min support parameters. Make sure to document your code and comment on the results obtained. You will discuss this further in the Collaborative Activity for this lesson.\\
+
+
+\textbf{Part 2 - FPgrowth [30 Points]:}\\
+
+Repeat the above process but this time use FP-growth. You may use the code provided
+at \url{https://goo.gl/Rv8KAa}, or some other Python implementation that you might find online (just be sure to cite your sources).\\
+
+
+\textbf{Part 3 - Interest Factor [30 Points]:}\\
+
+Use either Apriori or FPgrowth algorithm with 2\% support and 30\% confidence to generate the rules. Now, calculate interest factor for all the rules. \\
+
+Prepare three sets of rules sorted in descending order by - support, confidence, and interest factor, respectively. Select and print the top-5 rules in each list.  Compare and mention if any rules are common in those. 
+
+
+\end{document}

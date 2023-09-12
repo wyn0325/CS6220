@@ -1,0 +1,105 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document class 
+\documentclass[letter-paper,12pt]{article} % This defines the style of your paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor={blue},
+}
+
+\usepackage{xcolor}
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+\usepackage{graphicx} 
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{subfigure}
+\usepackage{subcaption}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+\pagestyle{fancy} % With this command we can customize the header style.
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+% \title{CS 6220 Data Mining --- Assignment 9}
+% \date{}
+
+\begin{document}
+% \thispagestyle{empty} % This command disables the header on the first page. 
+% \maketitle
+
+% \hline
+\begin{center}
+\begin{Huge}
+CS 6220 Data Mining --- Assignment 9
+\end{Huge}
+\end{center}
+
+\hline
+\hline
+~\\~\\~\\
+
+\begin{center}
+\begin{Large}
+\textbf{Model Evaluation}
+\end{Large}
+\end{center}
+~\\~\\
+
+For this assignment, you may use a dataset of your choice with binary classification. You can also manipulate your dataset forcing it to be binary. To do that you can select half of your classes and simply convert them to 0, and do the same for the other half, converting them to 1.\\
+
+In this assignment, you will be using the Decision Tree classifier in two different settings, and compare the evaluation metrics for them. \\
+
+\textbf{Objectives:}\\
+
+Deliver a notebook containing a detailed evaluation report listing the metrics listed below.
+
+\begin{enumerate}
+\item The accuracy of your model on the test data
+\item The precision and recall values
+\item A classification report (scikit-learn has a function that can create this for you)
+\item The confusion matrix for this experiment
+\item An ROC curve
+\item A Precision/Recall curve
+\end{enumerate}
+~\\
+
+\textbf{Submission:}\\
+
+Submit your ipynb file on the Assignment submission portal. \\~\\
+
+
+\textbf{Grading Criteria:}\\
+Follow the instructions in the pdf, and complete each task. You will be graded on the application of the modules’ topics, the completeness of your answers to the questions in the assignment notebook, and the clarity of your writing and code.\\~\\
+
+
+\newpage
+
+\begin{center}
+    \Large \textbf{Assignment Description}
+\end{center}
+
+\begin{enumerate}
+    \item Split the dataset into training set and test set (80, 20).
+    
+    \item Using scikit-learn’s DecisionTreeClassifier, train a supervised learning model that can be used to generate predictions for your data.
+    
+    \item Similarly as in previous step, train another Decision Tree Classifier - but in this case set the maximum depth of the tree to 1 ($max\_depth=1$). Use the same training and test set as you used for the Decision Tree in the previous step. 
+
+    \item Report on the six evaluation metrics listed in objective for both the models, and compare their results.\\
+\end{enumerate}
+
+
+\end{document}

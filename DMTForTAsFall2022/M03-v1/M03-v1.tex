@@ -1,0 +1,145 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document class
+\documentclass[letter-paper,12pt]{article} % This defines the style of your paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor={blue},
+}
+
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+\usepackage{graphicx}
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{subfigure}
+\usepackage{subcaption}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+\pagestyle{fancy} % With this command we can customize the header style.
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+% \title{CS 6220 Data Mining --- Assignment 3}
+% \date{}
+
+\begin{document}
+% \thispagestyle{empty} % This command disables the header on the first page.
+% \maketitle
+
+% \hline
+\begin{center}
+\begin{Huge}
+CS 6220 Data Mining --- Assignment 3
+\end{Huge}
+\end{center}
+
+\hline
+\hline
+~\\~\\~\\
+
+\begin{center}
+\begin{Large}
+\textbf{Face Recognition using PCA}
+\end{Large}
+\end{center}
+~\\~\\
+
+For this assignment, you will be using a PCA to reduce the dimension of data, and use the reduced data for face recognition. \\
+
+\textbf{Objectives:}
+\begin{enumerate}
+    \item Employ data reduction techniques such as principal component analysis
+    \item Use PCA to generate eigenfaces from face images
+    \item Implement face recognition technique using eigenfaces
+\end{enumerate}
+~\\
+\textbf{Submission:}\\
+Submit your ipynb via canvas.\\~\\
+
+
+\textbf{Grading Criteria:}\\
+Follow the instructions in the pdf, and complete each task. You will be graded on the application of the module’s topics, the completeness of your answers to the questions in the assignment notebook, and the clarity of your writing and code.\\~\\
+
+\textbf{Dataset:}\\
+For this assignment, you will use the dataset from `AT\&T Database of Faces'. Download the dataset from \href{https://www.kaggle.com/datasets/kasikrit/att-database-of-faces?resource=download}{here}.
+The dataset contains a total of 400 face images of 40 different subjects having 10 images each. The image files are in PGM format. The size of each image is 112$\times$92 pixels, with 256 grey levels per pixel. The images are organised in 40 directories (one for each subject), which have names of the form sX, where X indicates the subject number (between 1 and 40). In each of these directories, there are ten different images of that subject, which have names of the form Y.pgm, where Y is the image number for that subject (between 1 and 10).
+
+\newpage
+
+\begin{center}
+    \Large \textbf{What You Need to Do}
+\end{center}
+
+
+\textbf{Part 1 - Visualizing the Face Images [10 Points]}\\
+You can use the following code to read and visualize an image. Code shown for reading the first image of the first subject.
+\begin{verbatim}
+with open(`face_data/s1/1.pgm', `rb') as image:
+    img = cv2.imdecode(np.frombuffer(image.read(), np.uint8), cv2.IMREAD_GRAYSCALE)
+
+plt.imshow(img, cmap="gray")
+\end{verbatim}\\
+
+
+\begin{enumerate}
+    \item Visualize randomly selected 16 faces in a 4$\times$4 grid [4 rows and 4 columns].
+    \item Report the face image size, number of images and number of classes.
+\end{enumerate}
+
+\textbf{Part 2 - Train Test Split [10 Points]}
+\begin{enumerate}
+    \item Generate Train and Test set from the dataset in the following manner.
+    \item Select the first nine images of each subject for the Train set.
+    \item Select the last image of each subject for the Test set.
+    \item Flatten each image into 1D vector so that the dataset size is $N\times L$, where $N$ is the number of samples in the train/test set and $L$ is the length of flattened image ($L=92\times 112 = 10304$).
+    \item Report the number of images in Train set and Test set.
+\end{enumerate}
+
+\textbf{Part 3 - Apply PCA to Get Eigenfaces [30 Points]}
+\begin{enumerate}
+    \item Apply PCA using scikit-learn on the Train set
+    \item Take first 20 principal components in the feature space. These are known as eigenfaces.
+    \item Visualize the first 16 eigenfaces. For visualization, reshape the flattened vector to original image shape.
+\end{enumerate}
+
+\textbf{Part 4 - Face Recognition [30 Points]}
+
+For face recognition, we first need to calculate weights for each sample in the Train set with respect to each principal component. For a test image, we again calculate a weight and measure euclidean distance from each sample of the Train set. The class of the sample with the minimum distance is the predicted class for the test image.
+
+\begin{verbatim}
+    train_sample_weights = np.matmul(eigenfaces, (train_facematrix - pca.mean_).T)
+\end{verbatim}
+Here, $eigenfaces$ is of shape $K \times L$, $train\_facematrix$ is of shape $N \times L$, $pca.mean\_$ is a vector of length $L$, and $train_sample_weights$ is of shape $K \times N$. $K$ denotes the number of first principal components.
+
+\begin{enumerate}
+    \item Calculate the weights of the training samples using the given formula.
+    \item For each test image, calculate weights similarly.
+    \item Take the minimum euclidean distance between the test image weight and all the training sample weights to predict the class of the test image.
+    \item For each test image, Visualize the test image and the train image with minimum distance.
+    \item Report accuracy and total explained variance ratio by the selected components.
+
+\end{enumerate}
+
+\textbf{Part 5 - Face Recognition [20 Points]}
+\begin{enumerate}
+    \item Repeat Part 4 using only first two principal components instead of 20. Visualize the first two eigenfaces.
+    \item Repeat Part 5.
+    \item Compare the results using the explained variance ratio of PCA.
+
+\end{enumerate}
+
+
+\end{document}

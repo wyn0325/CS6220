@@ -1,0 +1,160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document class 
+\documentclass[letter-paper,12pt]{article} % This defines the style of your paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    urlcolor={blue},
+}
+
+\usepackage{xcolor}
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+\usepackage{graphicx} 
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{url}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{subfigure}
+\usepackage{subcaption}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+\pagestyle{fancy} % With this command we can customize the header style.
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+% \title{CS 6220 Data Mining --- Assignment 6}
+% \date{}
+
+\begin{document}
+% \thispagestyle{empty} % This command disables the header on the first page. 
+% \maketitle
+
+% \hline
+\begin{center}
+\begin{Huge}
+CS 6220 Data Mining --- Assignment 6
+\end{Huge}
+\end{center}
+
+\hline
+\hline
+~\\~\\~\\
+
+\begin{center}
+\begin{Large}
+\textbf{Regression}
+\end{Large}
+\end{center}
+~\\~\\
+
+This assignment will require you to implement and interpret some regression concepts introduced in this weeks lesson module. Keep in mind that the main objective of this assignment is to highlight the insights that we can derive from applying these techniques. While the coding aspect is important it is secondary. Accordingly, you are welcome to consult any online documentation and/or code that has been posted to the course website, so long as all references and sources are properly cited. You are also encouraged to use code libraries, so long as you acknowledge any source code that was not written by you by mentioning the original author(s) directly in your source code (comment or header).
+
+Using the Boston House-Prices dataset, you will be asked to construct a linear regression using different features of the dataset to predict the target. You will then be asked to evaluate the performance of the regression with visual outputs.\\
+
+\textbf{Objectives:}
+\begin{enumerate}
+    \item Apply linear regression to a dataset containing numerical features 
+    \item Evaluate the performance of linear regression using R-squared metric and Mean Squared Error
+\end{enumerate}
+~\\
+
+\textbf{Submission:}\\
+
+Submit ipynb and pdf files on the Assignment submission portal. \\~\\
+
+
+\textbf{Grading Criteria:}\\
+Follow the instructions in the pdf, and complete each task. You will be graded on the application of the modules’ topics, the completeness of your answers to the questions in the assignment notebook, and the clarity of your writing and code.\\~\\
+
+
+\newpage
+
+\begin{center}
+    \Large \textbf{Assignment Description}
+\end{center}
+
+\textbf{The Data}
+The given dataset contains information of Boston housing-prices. The dataset has 13 numeric/categorical predictive attributes. Median Value (attribute 14) is usually the target. You can know more about the dataset from \url{https://scikit-learn.org/stable/datasets/index.html#toy-datasets}.\\
+The dataset can be loaded using the sklearn datasets module. You cam get the feature names from the provided link. \\
+
+
+
+\textbf{The Idea: Linear Regression on Boston House-Prices Dataset}\\
+Here, we want to predict the ``Median value of owner-occupied homes'', which is the feature14. In this assignment, we will predict the target feature using all the other features. And then we will use single features to predict the target feature. \\
+
+
+\textbf{What to Do}\\
+First, load the dataset from sklearn dataset using the following code snippet. \\
+
+\texttt{from sklearn.datasets import load\_boston\\
+X, y = load\_boston(return\_X\_y=True)\\
+}
+
+
+To generate a linear regression model, you may use the \textit{linear\_model.LinearRegression()} function available via the scikit-learn library. To run the model on the Boston data, first divide the dataset into training and testing sets(80 and 20 percent, respectively), then fit the model on the training set and predict with the fitted model on the testing set. scikit-learn provides several functions for dividing datasets in this manner, including \textit{cross\_validation.KFold} and \textit{cross\_validation.train\_test\_split}.
+
+
+Several statistics can be generated from a linear model. Given a fitted linear model, the following code outputs the model coefficients (the parameter values for the fitted model), the residual sum of squares (the model error), and the explained variance or R square or Variance Score(the degree to which the model explains the variation present in the data):\\
+
+\texttt{\# The coefficients\\
+print(’Coefficients:’, regr.coef )\\ 
+\# The mean squared error\\
+print(”Mean squared error: \%.2f” \% np.mean((coly\_pred − coly\_test ) ∗∗ 2))\\
+\# Explained variance score : 1 is perfect prediction\\
+print(’Variance score: \%.2f’ \% regr.score(colx\_test , coly\_test)\\
+}
+
+You can use these scores to measure the efficacy of a particular linear model.\\
+
+\textbf{What to do }\\
+
+\textbf{Step 1} Split the dataset into training and test sets (80, 20). \\
+\textbf{Step 2(a)}  Use all the features (1-13) to fit the linear regression model for feature 14 using the training set.\\ 
+\textbf{Step 2(b)} Report the coefficients, mean squared error and variance score for the model on the test set. \\
+\textbf{Step 3(a)} Use each feature alone - to fit a linear regression model on the training set.\\
+\textbf{Step 3(b)} Report the coefficient, mean squared error and variance score for the model on the test set. Also report the thirteen plots of the linear regression models generated on each feature. Each plot should distinctly show the training points, test points and the linear regression line.\\
+\textbf{Step 4(a)} Perform 10 iterations of (Step 1, Step 2(a), and Step 3(a)).\\
+\textbf{Step 4(b)} 
+\begin{itemize}
+    \item During each iteration of Step4(a), gather the metrics - mean squared error and variance score for the 14 models on the test set.
+    \item For each feature, compute the average, over the 10 iterations,  of each evaluation metric.  Do the same for the metrics corresponding to 'all features'. 
+    \item To compare the model performance, provide the following plots 
+		\begin{enumerate}   
+         	\item{mean square error vs features}
+         	\item{variance score vs features}
+         \end{enumerate}
+    \item  In the above mentioned two plots, make sure to designate a point on the features axis for 'all 13 features' so you can include the metrics corresponding to the models generated in the 10 iterations of Step 2(a). E.g.,  You may designate it as feature 0.  \\ 
+\end{itemize}\\
+
+
+\textbf{What to Provide}\\
+
+
+Your output should contain the following:
+\begin{itemize}
+    \item Report generated in Step 2(b)
+    \item Thirteen sets of metrics and plots  generated in Step 3(b)
+    \item  Two plots generated in Step 4(b) 
+	\item Given this output, respond to the following questions:
+			\begin{enumerate}
+    			\item Based upon the linear models you generated, which feature appears to be most predictive for the target feature? Note that you can answer this question based upon the output provided for the linear models.
+
+    			\item Suppose you need to select two features for a linear regression model to predict the target feature. Which two features would you select? Why?
+    
+    			\item Examine all the plots and numbers you have, do you have any comments on them? Do you find any surprising trends? Do you have any idea about what might be causing this surprising trend in the data? This is a descriptive question meant to encourage you to interpret your results and express yourself. 
+        
+\end{enumerate}
+\end{itemize}
+
+\end{document}

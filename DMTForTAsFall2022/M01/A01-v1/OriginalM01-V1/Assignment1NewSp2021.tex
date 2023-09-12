@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. Document class 
+\documentclass[letter-paper,12pt]{article} % This defines the style of your paper
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2. Packages
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+\usepackage{graphicx} 
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb,amsthm,bm}
+\usepackage{subfigure}
+\usepackage{subcaption}
+
+\titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Header (and Footer)
+\pagestyle{fancy} % With this command we can customize the header style.
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+% \title{CS 6220 Data Mining --- Assignment 1}
+% \date{}
+
+\begin{document}
+% \thispagestyle{empty} % This command disables the header on the first page. 
+% \maketitle
+
+% \hline
+\begin{center}
+\begin{Huge}
+CS 6220 Data Mining --- Assignment 1
+\end{Huge}
+\end{center}
+
+\hline
+\hline
+~\\~\\~\\
+
+\begin{center}
+\begin{Large}
+\textbf{Exploring the MovieLens Dataset}
+\end{Large}
+\end{center}
+~\\~\\
+
+On this assignment, you’ll describe how a simple recommendation system can be crafted to leverage user ratings and generate individual recommendations for movies, products, and anything else that can be rated.\\
+
+
+Below are two links to material that will serve as a solid starting point for what you will submit: 
+\begin{enumerate}
+    \item \url{https://goo.gl/qZUEm8} - A notebook with some initial data exploration of the MovieLens dataset. 
+    \item \url{http://www.gregreda.com/2013/10/26/using-pandas-on-the-movielens-dataset/} - A blog post containing some further analysis of that dataset. 
+\end{enumerate}
+~\\~
+
+\textbf{Objective}:\\
+Download the data (link 1 above contains instructions on how you can do that) and extend the presented data exploration to include:
+
+\begin{enumerate}
+    \item {[10 pts]} An aggregate on the number of rating done for each particular genre, e.g., Action, Adventure, Drama, Science Fiction, ...
+    \item {[5 pts]} The top 5 ranked genres by women on most number of rating.
+    \item {[5 pts]} The top 5 ranked genres by men on most number of rating.
+    \item {[30 pts]} Pick a genre of your choice and provide average movie's ratings by the following four time intervals during which the movies were released (a) 1970 to 1979 (b) 1980 to 1989 (c) 1990 to 1999 (d) 2000 to 2009. Also, if you observed any issues with data in any of these ranges, please mention it.    
+    \item {[30 pts]} A function that given a \verb|genre| and a \verb|rating_range| (i.e. [3.5, 4]), returns all the movies of that genre and within that rating range sorted by average rating. Using an example, demonstrate that your function works.  
+    \item {[20 pts]} Present one other statistic, figure, aggregate, or plot that you created using this dataset, along with a short description of what interesting observations you derived from it. This question is meant to give you a freehand to explore and present aspects of the dataset that interests you. 
+\end{enumerate}
+
+
+You may use the code available on both of the provided notebook files as a starting point.
+Submission:
+Submit your ipynb file through the assignment submission portal on Canvas.
+
+\end{document}
